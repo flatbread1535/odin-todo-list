@@ -10,7 +10,7 @@ class Todo {
         this.id = crypto.randomUUID();
     }
 
-    // Editing functions
+    // Todo editing methods
 
     editTitle(newTitle) {
         this.title = newTitle;

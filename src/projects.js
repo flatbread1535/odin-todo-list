@@ -4,25 +4,27 @@ class Project {
 
     constructor(name) {
         this.name = name;
-        this.todos = [];
-
+        this.todos = []; // Stores all todo items
+        this.projectId = crypto.randomUUID;
     }
 
     rename(newName) {
         this.name = newName;
     }
 
+    // Methods for adding, getting, or removing projects
+
     addTodo(title, description, dueDate, priority, notes, isComplete) {
         const todo = new Todo(title, description, dueDate, priority, notes, isComplete);
         this.todos.push(Todo);
     }
 
-    getTodo(id) {
-        return this.todos.find(todo => todo.id === id);
+    getTodo(todoId) {
+        return this.todos.find(todo => todo.id === todoId);
     }
 
-    removeTodo(id) {
-        this.todos.filter(todo => todo.id !== id);
+    removeTodo(todoId) {
+        this.todos.filter(todo => todo.id !== todoId);
     }
 
 }
