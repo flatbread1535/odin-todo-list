@@ -1,7 +1,7 @@
 import { Project } from "./projects.js";
 
-const projectManager = () => {
-    const projects = []; // stores all projects
+const createProjectManager = () => {
+    let projects = []; // stores all projects
 
     // Methods for adding, getting, or removing projects
 
@@ -15,10 +15,11 @@ const projectManager = () => {
     };
 
     const deleteProject = (projectId) => {
-        projects.filter(project => project.projectId !== projectId);
+        projects = projects.filter(project => project.projectId !== projectId);
     };
 
     return { addProject, getProject, deleteProject };
 };
 
+const projectManager = createProjectManager();
 export { projectManager };
