@@ -1,3 +1,5 @@
+import { projectManager } from "./storage.js";
+
 const sidebarLoad = () => {
 
     const loadNewProjectPrompt = () => {
@@ -7,40 +9,53 @@ const sidebarLoad = () => {
         if (document.querySelector(".new-project")) return;
 
         // New project prompt container
-        const projPrompt = document.createElement("div");
-        projPrompt.classList.add("new-project");
+        const projForm = document.createElement("form");
+        projForm.classList.add("new-project");
 
         // Label for instruction to input project name
         const nameInstruction = document.createElement("label");
         nameInstruction.htmlFor = "project-name";
         nameInstruction.textContent = "Project Name:";
-        projPrompt.appendChild(nameInstruction);
+        projForm.appendChild(nameInstruction);
 
         // Input box for project name
         const nameInput = document.createElement("input");
         nameInput.type = "text";
         nameInput.id = "project-name";
-        projPrompt.appendChild(nameInput);
+        nameInput.required = true;
+        projForm.appendChild(nameInput);
 
         // Container and buttons to create or cancel project
         const projOptions = document.createElement("div");
         projOptions.classList.add("create-proj-opt");
+
+        // Button to create a new project
         const createProjBtn = document.createElement("button");
+        createProjBtn.type = "submit";
         createProjBtn.classList.add("create-proj");
         createProjBtn.textContent = "Create";
         projOptions.appendChild(createProjBtn);
+
+        // Button to cancel the creation of a new project
         const cancelProjBtn = document.createElement("button");
+        cancelProjBtn.type = "button";
         cancelProjBtn.classList.add("cancel-proj");
         cancelProjBtn.textContent = "Cancel";
         projOptions.appendChild(cancelProjBtn);
-        projPrompt.appendChild(projOptions);
+        projForm.appendChild(projOptions);
 
-        promptContainer.appendChild(projPrompt);
+        promptContainer.appendChild(projForm);
 
-        cancelProjBtn.onclick = () => projPrompt.remove();
+        cancelProjBtn.onclick = () => projForm.remove();
     };
 
-    return {loadNewProjectPrompt };
+    const loadNewProject = (projectName) => {
+        
+        projectManager.addProject(projectName);
+
+    }
+
+    return { loadNewProjectPrompt, loadNewProject };
 };
  
 export { sidebarLoad };
