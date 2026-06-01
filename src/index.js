@@ -1,3 +1,8 @@
+import { sidebarLoad } from "./sidebar.js";
 import "./style.css";
 
-console.log("test");
+const sidebar = sidebarLoad();
+const addProjBtn = document.querySelector(".add-project");
+addProjBtn.addEventListener("click", () => {
+    sidebar.loadNewProjectPrompt();
+});

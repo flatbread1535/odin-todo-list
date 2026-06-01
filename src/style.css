@@ -10,6 +10,9 @@
     --gray: #F1F1F1;
     --blue: #1A73E8;
     --dark-gray: #1E2229;
+    --red: #FF4D4F;
+    --hover-red: #FF7476;
+    --hover-blue: #4285F4;
 }
 
 * {
@@ -88,6 +91,10 @@
     padding-left: 20px;
 }
 
+.add-project {
+    margin-bottom: 10px;
+}
+
 .home-option:hover,
 .add-project:hover {
     background-color: var(--gray);
@@ -110,4 +117,73 @@
 .add-project p {
     font-size: 1rem;
     color: var(--dark-gray);
+}
+
+.project-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.new-project {
+    border: 1px solid var(--dark-gray);
+    border-radius: 10px;
+    padding: 20px;
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+label[for="project-name"] {
+    font-size: 1rem;
+    color: var(--dark-gray);
+}
+
+input[id="project-name"] {
+    width: 180px;
+    height: 28px;
+    border-radius: 12px;
+    border: 1px solid var(--dark-gray);
+    padding: 0 12px;
+    color: var(--dark-gray);
+    font-size: 0.9rem;
+}
+
+input[id="project-name"]:focus {
+    outline: none;
+}
+
+.create-proj-opt {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.create-proj,
+.cancel-proj {
+    width: 100px;
+    height: 28px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.8rem;
+    color: var(--white);
+}
+
+.create-proj {
+    background: var(--blue);
+}
+
+.cancel-proj {
+    background: var(--red);
+}
+
+.create-proj:hover {
+    background: var(--hover-blue)
+}
+
+.cancel-proj:hover {
+    background: var(--hover-red);
 }
