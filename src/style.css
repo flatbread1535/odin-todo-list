@@ -1,0 +1,113 @@
+@font-face {
+    font-family: "Lato";
+    src: url('./fonts/Lato-Regular.ttf') format('truetype');
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    --white: #FFFFFF;
+    --gray: #F1F1F1;
+    --blue: #1A73E8;
+    --dark-gray: #1E2229;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#content {
+    font-family: "Lato", sans-serif;
+    min-height: 100vh;
+    background: var(--gray);
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+.top-bar {
+    border-bottom: 4px solid var(--dark-gray);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    padding: 10px 20px;
+    background: var(--blue);
+}
+
+.toggle-sidebar {
+    background: none;
+    border: none;
+    height: 40px;
+    width: 40px;
+    grid-column: 1;
+    cursor: pointer;
+}
+
+.toggle-sidebar svg {
+    fill: var(--white);
+}
+
+.top-bar h1 {
+    font-size: 3rem;
+    grid-column: 2;
+    justify-self: center;
+    color: var(--white);
+}
+
+.sidebar {
+    background: var(--white);
+    width: 260px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 100px; /* change later */
+}
+
+.home > h2,
+.projects > h2 {
+    font-size: 2rem;
+    color: var(--dark-gray);
+    border-bottom: 2px solid var(--dark-gray);
+    padding-bottom: 4px;
+    margin-bottom: 12px;
+}
+
+.home-option,
+.add-project {
+    width: 220px;
+    height: 40px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 24px;
+    border: none;
+    border-radius: 10px;
+    background: none;
+    cursor: pointer;
+    padding-left: 20px;
+}
+
+.home-option:hover,
+.add-project:hover {
+    background-color: var(--gray);
+}
+
+.home-option svg,
+.add-project svg {
+    height: 20px;
+    width: 20px;
+    gap: 10px;
+    fill: var(--dark-gray)
+}
+
+.add-project svg {
+    border-radius: 50%;
+    border: 1.5px solid var(--dark-gray);
+}
+
+.home-option p,
+.add-project p {
+    font-size: 1rem;
+    color: var(--dark-gray);
+}
