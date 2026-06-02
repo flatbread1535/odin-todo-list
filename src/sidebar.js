@@ -1,4 +1,6 @@
 import { projectManager } from "./storage.js";
+import folderSvg from "./svgs/folder.svg";
+import menuSvg from "./svgs/menu.svg";
 
 const sidebarLoad = () => {
 
@@ -53,7 +55,36 @@ const sidebarLoad = () => {
         
         projectManager.addProject(projectName);
 
+        const projects = document.querySelector(".projects");
+
+        const projectItem = document.createElement("div");
+        projectItem.classList.add("project-item");
+
+        const projectTab = document.createElement("button");
+        projectTab.classList.add("project-tab");
+
+        const folderIcon = document.createElement("img");
+        folderIcon.src = folderSvg;
+        projectTab.appendChild(folderIcon);
+
+        const name = document.createElement("p");
+        name.textContent = projectName;
+        projectTab.appendChild(name);
+        projectItem.appendChild(projectTab);
+
+        const projOptBtn = document.createElement("button");
+        projOptBtn.classList.add("project-opt-btn");
+
+        const menuIcon = document.createElement("img");
+        menuIcon.src = menuSvg;
+        projOptBtn.appendChild(menuIcon);
+
+        projectItem.appendChild(projOptBtn);
+
+        projects.appendChild(projectItem);
     }
+
+    // Add toggleSidebar function later
 
     return { loadNewProjectPrompt, loadNewProject };
 };
