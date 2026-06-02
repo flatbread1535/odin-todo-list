@@ -8,6 +8,7 @@ const createProjectManager = () => {
     const addProject = (name) => {
         const project = new Project(name);
         projects.push(project);
+        return project;
     };
 
     const getProject = (projectId) => {

@@ -1,6 +1,7 @@
 import { projectManager } from "./storage.js";
 import folderSvg from "./svgs/folder.svg";
 import menuSvg from "./svgs/menu.svg";
+import deleteSvg from "./svgs/delete.svg";
 
 const sidebarLoad = () => {
 
@@ -53,12 +54,14 @@ const sidebarLoad = () => {
 
     const loadNewProject = (projectName) => {
         
-        projectManager.addProject(projectName);
+        const newProject = projectManager.addProject(projectName);
+        const newProjectId = newProject.projectId;
 
         const projects = document.querySelector(".projects");
 
         const projectItem = document.createElement("div");
         projectItem.classList.add("project-item");
+        projectItem.dataset.projectId = newProjectId;
 
         const projectTab = document.createElement("button");
         projectTab.classList.add("project-tab");
@@ -68,25 +71,37 @@ const sidebarLoad = () => {
         projectTab.appendChild(folderIcon);
 
         const name = document.createElement("p");
+        name.classList.add("proj-name");
         name.textContent = projectName;
         projectTab.appendChild(name);
         projectItem.appendChild(projectTab);
 
-        const projOptBtn = document.createElement("button");
-        projOptBtn.classList.add("project-opt-btn");
+        const projOpt = document.createElement("div");
+        projOpt.classList.add("project-opt");
+
+        const deleteProjBtn = document.createElement("button");
+        deleteProjBtn.classList.add("project-opt-btn", "delete-proj");
+        
+        const deleteIcon = document.createElement("img");
+        deleteIcon.src = deleteSvg;
+        deleteProjBtn.appendChild(deleteIcon);
+        projOpt.appendChild(deleteProjBtn);
+
+        const editProjBtn = document.createElement("button");
+        editProjBtn.classList.add("project-opt-btn", "edit-proj");
 
         const menuIcon = document.createElement("img");
         menuIcon.src = menuSvg;
-        projOptBtn.appendChild(menuIcon);
-
-        projectItem.appendChild(projOptBtn);
-
+        editProjBtn.appendChild(menuIcon);
+        projOpt.appendChild(editProjBtn);
+        
+        projectItem.appendChild(projOpt);
         projects.appendChild(projectItem);
-    }
-
+    };
+    
     // Add toggleSidebar function later
 
-    return { loadNewProjectPrompt, loadNewProject };
+    return { loadNewProjectPrompt, loadNewProject, loadEditProjectPrompt };
 };
  
 export { sidebarLoad };
