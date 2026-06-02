@@ -141,8 +141,11 @@ const sidebarLoad = () => {
         cancelProj.onclick = () => editProject.remove();
     };
 
-    const renameProject = (newProjectName) => {
-
+    const renameProject = (projectContainer, projectId, newProjectName) => {
+        const project = projectManager.getProject(projectId);
+        project.rename(newProjectName);
+        const name = projectContainer.querySelector(".proj-name");
+        name.textContent = newProjectName;
     };
 
     const loadDeletePrompt = (projectContainer) => {

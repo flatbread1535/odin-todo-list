@@ -13,11 +13,24 @@ addProjBtn.addEventListener("click", () => {
 const sidebarContainer = document.querySelector(".sidebar");
 sidebarContainer.addEventListener("submit", (e) => {
     e.preventDefault();
+
     if (e.target.classList.contains("new-project")) {
-        const projectNameIpt = e.target.querySelector("input[id=\"project-name\"]");
+        const projectNameIpt = e.target.querySelector("#project-name");
         const projectName = projectNameIpt.value;
         sidebar.loadNewProject(projectName);
         e.target.remove();
+        return;
+    }
+
+    if (e.target.classList.contains("edit-project")) {
+        const projectContainer = e.target.closest(".project-container");
+        const projectId = projectContainer.dataset.projectId;
+        
+        const newNameIpt = e.target.querySelector("#new-name");
+        const newName = newNameIpt.value;
+        sidebar.renameProject(projectContainer, projectId, newName);
+        e.target.remove();
+        return;
     }
 });
 
@@ -42,3 +55,4 @@ projects.addEventListener("click", (e) => {
         return;
     }
 });
+
