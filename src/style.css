@@ -171,7 +171,8 @@ body {
     flex-direction: column;
 }
 
-.new-project {
+.new-project,
+.edit-project {
     border: 1px solid var(--dark-gray);
     border-radius: 10px;
     padding: 20px;
@@ -182,12 +183,14 @@ body {
     margin: 10px 0;
 }
 
-label[for="project-name"] {
+label[for="project-name"],
+label[for="new-name"] {
     font-size: 1rem;
     color: var(--dark-gray);
 }
 
-input[id="project-name"] {
+input[id="project-name"],
+input[id="new-name"] {
     width: 180px;
     height: 28px;
     border-radius: 12px;
@@ -197,11 +200,13 @@ input[id="project-name"] {
     font-size: 0.9rem;
 }
 
-input[id="project-name"]:focus {
+input[id="project-name"]:focus,
+input[id="new-name"]:focus {
     outline: none;
 }
 
-.create-proj-opt {
+.create-proj-opt,
+.edit-proj-opt {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -209,7 +214,8 @@ input[id="project-name"]:focus {
 }
 
 .create-proj,
-.cancel-proj {
+.cancel-proj,
+.rename-proj {
     width: 100px;
     height: 28px;
     border-radius: 10px;
@@ -219,7 +225,8 @@ input[id="project-name"]:focus {
     color: var(--white);
 }
 
-.create-proj {
+.create-proj,
+.rename-proj {
     background: var(--blue);
 }
 
@@ -227,7 +234,8 @@ input[id="project-name"]:focus {
     background: var(--red);
 }
 
-.create-proj:hover {
+.create-proj:hover,
+.rename-proj:hover {
     background: var(--hover-blue)
 }
 

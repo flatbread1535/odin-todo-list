@@ -20,3 +20,25 @@ sidebarContainer.addEventListener("submit", (e) => {
         e.target.remove();
     }
 });
+
+const projects = document.querySelector(".projects");
+projects.addEventListener("click", (e) => {
+    
+    const editBtn = e.target.closest(".edit-proj");
+
+    if (editBtn) {
+        const projectContainer = editBtn.closest(".project-container");
+        sidebar.loadEditPrompt(projectContainer);
+        console.log("Fizz");
+        return;
+    }
+
+    const deleteBtn = e.target.closest(".delete-proj");
+
+    if (deleteBtn) {
+        const projectContainer = deleteBtn.closest(".project-container");
+        sidebar.loadDeletePrompt(projectContainer);
+        console.log("Buzz");
+        return;
+    }
+});

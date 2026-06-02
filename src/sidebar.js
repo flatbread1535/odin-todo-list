@@ -59,9 +59,12 @@ const sidebarLoad = () => {
 
         const projects = document.querySelector(".projects");
 
+        const projectContainer = document.createElement("div");
+        projectContainer.classList.add("project-container");
+        projectContainer.dataset.projectId = newProjectId;
+
         const projectItem = document.createElement("div");
         projectItem.classList.add("project-item");
-        projectItem.dataset.projectId = newProjectId;
 
         const projectTab = document.createElement("button");
         projectTab.classList.add("project-tab");
@@ -96,12 +99,63 @@ const sidebarLoad = () => {
         projOpt.appendChild(editProjBtn);
         
         projectItem.appendChild(projOpt);
-        projects.appendChild(projectItem);
+        projectContainer.appendChild(projectItem);
+        projects.appendChild(projectContainer);
+    };
+
+    const loadEditPrompt = (projectContainer) => {
+        const editProject = document.createElement("form");
+        editProject.classList.add("edit-project")
+
+        if (document.querySelector(".edit-project")) return;
+        
+        const renameInstruction = document.createElement("label");
+        renameInstruction.htmlFor = "new-name";
+        renameInstruction.textContent = "Rename Project:";
+        editProject.appendChild(renameInstruction);
+        
+        const renameInput = document.createElement("input");
+        renameInput.type = "text";
+        renameInput.id = "new-name";
+        renameInput.required = true;
+        editProject.appendChild(renameInput);
+
+        const editProjOpt = document.createElement("div");
+        editProjOpt.classList.add("edit-proj-opt");
+        
+        const renameProj = document.createElement("button");
+        renameProj.type = "submit";
+        renameProj.classList.add("rename-proj");
+        renameProj.textContent = "Rename";
+        editProjOpt.appendChild(renameProj);
+
+        const cancelProj = document.createElement("button");
+        cancelProj.type = "button";
+        cancelProj.classList.add("cancel-proj");
+        cancelProj.textContent = "Cancel";
+        editProjOpt.appendChild(cancelProj);
+
+        editProject.appendChild(editProjOpt);
+        projectContainer.appendChild(editProject);
+
+        cancelProj.onclick = () => editProject.remove();
+    };
+
+    const renameProject = (newProjectName) => {
+
+    };
+
+    const loadDeletePrompt = (projectContainer) => {
+
+    };
+
+    const deleteProject = (projectId) => {
+
     };
     
     // Add toggleSidebar function later
 
-    return { loadNewProjectPrompt, loadNewProject, loadEditProjectPrompt };
+    return { loadNewProjectPrompt, loadNewProject, loadEditPrompt, renameProject, loadDeletePrompt, deleteProject };
 };
  
 export { sidebarLoad };
