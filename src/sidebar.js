@@ -53,46 +53,55 @@ const sidebarLoad = () => {
     };
 
     const loadNewProject = (projectName) => {
-        
         const newProject = projectManager.addProject(projectName);
         const newProjectId = newProject.projectId;
 
         const projects = document.querySelector(".projects");
 
+        // Creating a new container for the project and adding the project id to the container
         const projectContainer = document.createElement("div");
         projectContainer.classList.add("project-container");
         projectContainer.dataset.projectId = newProjectId;
 
+        // Container to store the actual project tab information
         const projectItem = document.createElement("div");
         projectItem.classList.add("project-item");
 
+        // Button for selecting the project
         const projectTab = document.createElement("button");
         projectTab.classList.add("project-tab");
 
+        // Folder SVG to left of button
         const folderIcon = document.createElement("img");
         folderIcon.src = folderSvg;
         projectTab.appendChild(folderIcon);
 
+        // Name of the project displayed on the tab
         const name = document.createElement("p");
         name.classList.add("proj-name");
         name.textContent = projectName;
         projectTab.appendChild(name);
         projectItem.appendChild(projectTab);
 
+        // Container that holds the menu and deletion buttons on the project tab
         const projOpt = document.createElement("div");
         projOpt.classList.add("project-opt");
 
+        // Deletion button
         const deleteProjBtn = document.createElement("button");
         deleteProjBtn.classList.add("project-opt-btn", "delete-proj");
         
+        // SVG inside the deletion button
         const deleteIcon = document.createElement("img");
         deleteIcon.src = deleteSvg;
         deleteProjBtn.appendChild(deleteIcon);
         projOpt.appendChild(deleteProjBtn);
 
+        // Edit button
         const editProjBtn = document.createElement("button");
         editProjBtn.classList.add("project-opt-btn", "edit-proj");
 
+        // SVG inside the edit button
         const menuIcon = document.createElement("img");
         menuIcon.src = menuSvg;
         editProjBtn.appendChild(menuIcon);
@@ -103,32 +112,40 @@ const sidebarLoad = () => {
         projects.appendChild(projectContainer);
     };
 
+    // 
     const loadEditPrompt = (projectContainer) => {
+        // Form and container for the edit project prompt
         const editProject = document.createElement("form");
         editProject.classList.add("edit-project")
 
+        // Checks if an edit proejct prompt is already open
         if (document.querySelector(".edit-project")) return;
         
+        // Label for rename input textbox
         const renameInstruction = document.createElement("label");
         renameInstruction.htmlFor = "new-name";
         renameInstruction.textContent = "Rename Project:";
         editProject.appendChild(renameInstruction);
         
+        // Input text box for renaming
         const renameInput = document.createElement("input");
         renameInput.type = "text";
         renameInput.id = "new-name";
         renameInput.required = true;
         editProject.appendChild(renameInput);
 
+        // Container for edit option buttons
         const editProjOpt = document.createElement("div");
         editProjOpt.classList.add("edit-proj-opt");
         
+        // Button for submitting project with new name
         const renameProj = document.createElement("button");
         renameProj.type = "submit";
         renameProj.classList.add("rename-proj");
         renameProj.textContent = "Rename";
         editProjOpt.appendChild(renameProj);
 
+        // Button for cancelling any editing information and closing prompt tab
         const cancelProj = document.createElement("button");
         cancelProj.type = "button";
         cancelProj.classList.add("cancel-proj");
@@ -138,9 +155,11 @@ const sidebarLoad = () => {
         editProject.appendChild(editProjOpt);
         projectContainer.appendChild(editProject);
 
+        // Closes edit prompt tab when cancel button is clicked
         cancelProj.onclick = () => editProject.remove();
     };
 
+    // Changes the name of a project tab
     const renameProject = (projectContainer, projectId, newProjectName) => {
         const project = projectManager.getProject(projectId);
         project.rename(newProjectName);
@@ -148,17 +167,16 @@ const sidebarLoad = () => {
         name.textContent = newProjectName;
     };
 
-    const loadDeletePrompt = (projectContainer) => {
-
-    };
-
-    const deleteProject = (projectId) => {
-
+    // Deletes a project tab from the sidebar
+    const deleteProject = (projectContainer) => {
+        const projectId = projectContainer.dataset.projectId;
+        projectManager.deleteProject(projectId);
+        projectContainer.remove();
     };
     
-    // Add toggleSidebar function later
+    // Add toggleSidebar function later, maybe deletion confirmation prompt
 
-    return { loadNewProjectPrompt, loadNewProject, loadEditPrompt, renameProject, loadDeletePrompt, deleteProject };
+    return { loadNewProjectPrompt, loadNewProject, loadEditPrompt, renameProject, deleteProject };
 };
  
 export { sidebarLoad };
