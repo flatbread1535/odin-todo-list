@@ -1,4 +1,5 @@
 import { sidebarLoad } from "./sidebar.js";
+import { projectDisplay } from "./project-display.js";
 import { projectManager } from "./storage.js";
 import "./style.css";
 

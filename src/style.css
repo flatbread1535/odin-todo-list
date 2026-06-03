@@ -13,6 +13,7 @@
     --red: #FF4D4F;
     --hover-red: #FF7476;
     --hover-blue: #4285F4;
+    --green: #28a745;
 }
 
 * {
@@ -29,11 +30,12 @@ body {
 #content {
     min-height: 100vh;
     display: grid;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto 1fr;    grid-template-columns: 260px 1fr;
 }
 
 .top-bar {
     border-bottom: 4px solid var(--dark-gray);
+    grid-column: 1 / 3;
     display: grid;
     grid-template-columns: auto 1fr auto;
     align-items: center;
@@ -62,6 +64,8 @@ body {
 }
 
 .sidebar {
+    grid-column: 1;
+    grid-row: 2;
     background: var(--white);
     width: 260px;
     display: flex;
@@ -241,4 +245,116 @@ input[id="new-name"]:focus {
 
 .cancel-proj:hover {
     background: var(--hover-red);
+}
+
+.main {
+    grid-column: 2;
+    grid-row: 2;
+    padding: 20px;
+    position: relative;
+}
+
+.project-header {
+    height: 60px;
+    background-color: var(--blue);
+    align-content: center;
+    text-align: center;
+    color: var(--white);
+    border-radius: 28px;
+    border: 2px solid var(--dark-gray);
+    margin-bottom: 20px;
+}
+
+.add-todo {
+    border-radius: 50%;
+    border: 2px solid var(--dark-gray);
+    height: 100px;
+    width: 100px;
+    background-color: var(--blue);
+    font-size: 4rem;
+    color: var(--white);
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    cursor: pointer;
+}
+
+.add-todo:hover {
+    background: var(--hover-blue);
+}
+
+.todo-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.todo-tab {
+    background: var(--white);
+    border: 2px solid var(--dark-gray);
+    height: 60px;
+    border-radius: 28px;
+    padding: 2px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.todo-basic-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 20px;
+}
+
+.todo-basic-info svg {
+    height: 40px;
+    width: 40px;
+    border-radius: 12px;
+    background: var(--green);
+}
+
+.todo-name {
+    font-weight: 800;
+    color: var(--dark-gray);
+    font-size: 1.2rem;
+}
+
+.todo-date {
+    color: var(--dark-gray);
+    font-size: 1rem;
+}
+
+.todo-state {
+    display: flex;
+    gap: 10px;
+    margin-right: 20px;
+    align-items: center;
+}
+
+.todo-priority-high {
+    border: 2px solid var(--red);
+    padding: 2px 8px;
+    color: var(--red);
+    border-radius: 16px;
+}
+
+.delete-todo,
+.view-todo {
+    height: 40px;
+    width: 40px;
+    border: none;
+    background: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.delete-todo svg, 
+.view-todo svg {
+    height: 28px;
+    width: 28px;
+}
+
+.delete-todo:hover,
+.view-todo:hover {
+    background: var(--gray);
 }
