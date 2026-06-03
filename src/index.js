@@ -1,14 +1,11 @@
 import { sidebarLoad } from "./sidebar.js";
-import { projectDisplay } from "./project-display.js";
+import { loadProjectDisplay } from "./project-display.js";
 import { projectManager } from "./storage.js";
 import "./style.css";
 
 const sidebarInit = () => {
     const sidebar = sidebarLoad();
-
-    // Initializes the website with a default project
-    projectManager.addProject("Default");
-    sidebar.loadNewProject("Default");
+    const projectDisplay = loadProjectDisplay();
 
     // Event listener to handle opening a new project prompt
     const addProjBtn = document.querySelector(".add-project");
@@ -38,8 +35,8 @@ const sidebarInit = () => {
             const newNameIpt = e.target.querySelector("#new-name");
             const newName = newNameIpt.value;
             sidebar.renameProject(projectContainer, projectId, newName);
+            projectDisplay.updateProjectHeader(projectId);
             e.target.remove();
-            return;
         }
     });
 
@@ -59,14 +56,53 @@ const sidebarInit = () => {
         const deleteBtn = e.target.closest(".delete-proj");
         if (deleteBtn) {
             const projectContainer = deleteBtn.closest(".project-container");
+            const projectId = projectContainer.dataset.projectId;
             sidebar.deleteProject(projectContainer);
-            return;
+            projectDisplay.removeProjectDisplay(projectId);
         }
     });
 };
 
+const projectDisplayInit = () => {
+    const projectDisplay = loadProjectDisplay();
+
+    const projects = document.querySelector(".projects");
+    projects.addEventListener("click", (e) => {
+        const projectTab = e.target.closest(".project-tab");
+
+        if (projectTab) {
+            const projectContainer = projectTab.closest(".project-container");
+            const projectId = projectContainer.dataset.projectId;
+            projectDisplay.displayProject(projectId);
+        }
+    });
+
+    const main = document.querySelector(".main");
+    main.addEventListener("click", (e) => {
+        const addTodoBtn = e.target.closest(".add-todo");
+
+        if (addTodoBtn) {
+            const projectId = addTodoBtn.dataset.projectId;
+            projectDisplay.loadTodoDialog(projectId);
+            console.log("Hello!");
+        }
+    });
+};
+
+// Initializes the website with a default project
+const defaultInit = () => {
+    const sidebar = sidebarLoad();
+    const projectDisplay = loadProjectDisplay();
+
+    const defaultProject = projectManager.addProject("Default");
+    sidebar.loadNewProject("Default");
+    projectDisplay.displayProject(defaultProject.projectId);
+};
+
 const webPageInit = () => {
+    defaultInit();
     sidebarInit();
+    projectDisplayInit();
 };
 
 webPageInit();
