@@ -358,3 +358,135 @@ input[id="new-name"]:focus {
 .view-todo:hover {
     background: var(--gray);
 }
+
+.todo-dialog {
+   overflow: hidden;
+   border: none;
+   border-radius: 32px;
+   margin: auto;
+}
+
+.todo-dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.dialog-form {
+    height: 640px;
+    width: 400px;
+    border: 2px solid var(--dark-gray);
+    border-radius: 32px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    color: var(--dark-gray);
+}
+
+.dialog-title {
+    margin: 0;
+    text-align: center;
+    color: var(--blue);
+    font-size: 2rem;
+}
+
+.dialog-text-ipt,
+.dialog-desc,
+.dialog-date,
+.dialog-notes {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+label[for="todo-title"],
+label[for="todo-description"],
+label[for="todo-notes"],
+.dialog-priority legend {
+    font-size: 1.1rem;
+}
+
+#todo-title,
+#todo-description,
+#todo-due-date,
+#todo-notes {
+    border: 1px solid var(--dark-gray);
+    border-radius: 12px;
+    font-size: 1rem;
+    font: inherit;
+}
+
+#todo-title,
+#todo-due-date {
+    height: 28px;
+    padding: 0 12px;
+}
+
+#todo-description,
+#todo-notes {
+    height: 80px;
+    padding: 10px 12px;
+    resize: none;
+}
+
+#todo-due-date {
+    width: 146px;
+}
+
+#todo-title:focus,
+#todo-description:focus,
+#todo-due-date:focus,
+#todo-notes:focus {
+    outline: none;
+}
+
+.dialog-priority {
+    border: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.dialog-priority legend {
+    margin-bottom: 0.5rem;
+}
+
+.priority-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.dialog-options {
+    display: flex;
+    gap: 10px;
+}
+
+.dialog-submit,
+.dialog-cancel {
+    width: 86px;
+    height: 36px;
+    border: none;
+    border-radius: 24px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: var(--white);
+}
+
+.dialog-submit {
+    background: var(--blue);
+}
+
+.dialog-cancel {
+    background: var(--red);
+}
+
+.dialog-submit:hover {
+    background: var(--hover-blue);
+}
+
+.dialog-cancel:hover {
+    background: var(--hover-red);
+}

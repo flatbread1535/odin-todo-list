@@ -82,10 +82,16 @@ const projectDisplayInit = () => {
         const addTodoBtn = e.target.closest(".add-todo");
 
         if (addTodoBtn) {
-            const projectId = addTodoBtn.dataset.projectId;
-            projectDisplay.loadTodoDialog(projectId);
-            console.log("Hello!");
+            const todoDialog = document.querySelector(".todo-dialog");
+            todoDialog.showModal();
         }
+    });
+
+    const todoDialog = document.querySelector(".todo-dialog");
+    const dialogCancelBtn = document.querySelector(".dialog-cancel");
+
+    dialogCancelBtn.addEventListener("click", () => {
+        todoDialog.close();
     });
 };
 

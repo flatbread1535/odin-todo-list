@@ -90,8 +90,7 @@
                         </button>
                         <button type="button" class="view-todo">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path
-                                    d="M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9M12,4.5C17,4.5 
+                                <path d="M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9M12,4.5C17,4.5 
                                     21.27,7.61 23,12C21.27,16.39 17,19.5 12,19.5C7,19.5 2.73,16.39 1,12C2.73,7.61 7,4.5 12,
                                     4.5M3.18,12C4.83,15.36 8.24,17.5 12,17.5C15.76,17.5 19.17,15.36 20.82,12C19.17,8.64 15.76,6.5 
                                     12,6.5C8.24,6.5 4.83,8.64 3.18,12Z" />
@@ -102,6 +101,52 @@
             </div>
             <button class="add-todo">+</button>
         </div>
+        <dialog class="todo-dialog">
+            <form method="dialog" class="dialog-form">
+                <h2 class="dialog-title">Add Todo</h2>
+                <div class="dialog-text-ipt">
+                    <label for="todo-title">Title:</label>
+                    <input type="text" id="todo-title" required>
+                </div>
+                <div class="dialog-desc">
+                    <label for="todo-description">Description:</label>
+                    <textarea id="todo-description" rows="3" cols="30" placeholder="What are you doing?"></textarea>
+                </div>
+                <div class="dialog-date">
+                    <label for="todo-due-date">Due Date:</label>
+                    <input type="date" id="todo-due-date" required>
+                </div>
+                <fieldset class="dialog-priority">
+                    <legend>Priority</legend>
+                    <label class="priority-option">
+                        <input type="radio" name="priority" value="high" checked>
+                        <span>High</span>
+                    </label>
+                    <label class="priority-option">
+                        <input type="radio" name="priority" value="medium">
+                        <span>Medium</span>
+                    </label>
+                    <label class="priority-option">
+                        <input type="radio" name="priority" value="low">
+                        <span>Low</span>
+                    </label>
+                </fieldset>
+                <div class="dialog-notes">
+                    <label for="todo-notes">Notes:</label>
+                    <textarea id="todo-notes" rows="3" cols="30"></textarea>
+                </div>
+                <div class="dialog-complete">
+                    <label for="todo-complete" class="complete-label">
+                        <input type="checkbox" id="todo-complete" value="is-complete">
+                        <span>Completed</span>
+                    </label>
+                </div>
+                <div class="dialog-options">
+                    <button type="submit" class="dialog-submit">Add Todo</button>
+                    <button type="button" class="dialog-cancel">Cancel</button>
+                </div>
+            </form>
+        </dialog>
     </div>
 </body>
 

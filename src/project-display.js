@@ -49,12 +49,8 @@ const loadProjectDisplay = () => {
             main.replaceChildren();
         }
     };
-
-    const loadTodoDialog = (projectId) => {
-
-    };
     
-    return { displayProject, updateProjectHeader, removeProjectDisplay, loadTodoDialog };
+    return { displayProject, updateProjectHeader, removeProjectDisplay };
 };
 
 export { loadProjectDisplay };
