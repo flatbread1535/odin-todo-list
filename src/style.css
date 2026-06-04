@@ -14,6 +14,8 @@
     --hover-red: #FF7476;
     --hover-blue: #4285F4;
     --green: #28a745;
+    --amber: #FFBF00;
+    --light-green: #A7F3D0;
 }
 
 * {
@@ -252,6 +254,8 @@ input[id="new-name"]:focus {
     grid-row: 2;
     padding: 20px;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .project-header {
@@ -273,10 +277,11 @@ input[id="new-name"]:focus {
     background-color: var(--blue);
     font-size: 4rem;
     color: var(--white);
-    position: absolute;
+    position: static;
     right: 20px;
     bottom: 20px;
     cursor: pointer;
+    align-self: flex-end;
 }
 
 .add-todo:hover {
@@ -287,6 +292,7 @@ input[id="new-name"]:focus {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    margin-bottom: 20px;
 }
 
 .todo-tab {
@@ -306,11 +312,20 @@ input[id="new-name"]:focus {
     margin-left: 20px;
 }
 
-.todo-basic-info svg {
+.complete-icon,
+.incomplete-icon {
     height: 40px;
     width: 40px;
     border-radius: 12px;
+
+}
+
+.complete-icon {
     background: var(--green);
+}
+
+.incomplete-icon {
+    background: var(--red);
 }
 
 .todo-name {
@@ -331,11 +346,26 @@ input[id="new-name"]:focus {
     align-items: center;
 }
 
-.todo-priority-high {
-    border: 2px solid var(--red);
+.todo-priority-high,
+.todo-priority-medium,
+.todo-priority-low {
     padding: 2px 8px;
-    color: var(--red);
     border-radius: 16px;
+}
+
+.todo-priority-high {
+    color: var(--red);
+    border: 2px solid var(--red);
+}
+
+.todo-priority-medium {
+    color: var(--amber);
+    border: 2px solid var(--amber);
+}
+
+.todo-priority-low {
+    color: var(--light-green);
+    border: 2px solid var(--light-green);
 }
 
 .delete-todo,
@@ -348,8 +378,8 @@ input[id="new-name"]:focus {
     cursor: pointer;
 }
 
-.delete-todo svg, 
-.view-todo svg {
+.delete-todo img, 
+.view-todo img {
     height: 28px;
     width: 28px;
 }
@@ -367,7 +397,7 @@ input[id="new-name"]:focus {
 }
 
 .todo-dialog::backdrop {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 .dialog-form {

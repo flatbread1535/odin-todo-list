@@ -65,6 +65,7 @@ const sidebarInit = () => {
 
 const projectDisplayInit = () => {
     const projectDisplay = loadProjectDisplay();
+    let currentProjectId = null;
 
     const projects = document.querySelector(".projects");
     projects.addEventListener("click", (e) => {
@@ -73,6 +74,7 @@ const projectDisplayInit = () => {
         if (projectTab) {
             const projectContainer = projectTab.closest(".project-container");
             const projectId = projectContainer.dataset.projectId;
+            currentProjectId = projectId;
             projectDisplay.displayProject(projectId);
         }
     });
@@ -83,6 +85,8 @@ const projectDisplayInit = () => {
 
         if (addTodoBtn) {
             const todoDialog = document.querySelector(".todo-dialog");
+            const dialogForm = document.querySelector(".dialog-form");
+            dialogForm.reset();
             todoDialog.showModal();
         }
     });
@@ -93,20 +97,39 @@ const projectDisplayInit = () => {
     dialogCancelBtn.addEventListener("click", () => {
         todoDialog.close();
     });
-};
 
-// Initializes the website with a default project
-const defaultInit = () => {
-    const sidebar = sidebarLoad();
-    const projectDisplay = loadProjectDisplay();
+    const dialogForm = document.querySelector(".dialog-form");
+    dialogForm.addEventListener("submit", (e) => {
+        e.preventDefault();
 
-    const defaultProject = projectManager.addProject("Default");
-    sidebar.loadNewProject("Default");
-    projectDisplay.displayProject(defaultProject.projectId);
+        const title = document.querySelector("#todo-title").value;
+        const description = document.querySelector("#todo-description").value;
+        const dueDate = document.querySelector("#todo-due-date").value;
+        const priorityOption = document.querySelector("input[name=\"priority\"]:checked").value;
+        const notes = document.querySelector("#todo-notes").value;
+        const isComplete = document.querySelector("#todo-complete").checked;
+
+        const project = projectManager.getProject(currentProjectId);
+
+        project.addTodo(title, description, dueDate, priorityOption, notes, isComplete);
+
+        projectDisplay.displayProject(currentProjectId);
+        todoDialog.close();
+    });
+
+    // Initializes the website with a default project
+    const defaultInit = () => {
+        const sidebar = sidebarLoad();
+
+        const defaultProject = projectManager.addProject("Default");
+        sidebar.loadNewProject("Default");
+        currentProjectId = defaultProject.projectId;
+    };
+
+    defaultInit();
 };
 
 const webPageInit = () => {
-    defaultInit();
     sidebarInit();
     projectDisplayInit();
 };

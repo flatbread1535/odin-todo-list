@@ -16,7 +16,7 @@ class Project {
 
     addTodo(title, description, dueDate, priority, notes, isComplete) {
         const todo = new Todo(title, description, dueDate, priority, notes, isComplete);
-        this.todos.push(Todo);
+        this.todos.push(todo);
     }
 
     getTodo(todoId) {
