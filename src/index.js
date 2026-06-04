@@ -1,3 +1,4 @@
+import { isToday, parseISO } from "date-fns";
 import { sidebarLoad } from "./sidebar.js";
 import { loadProjectDisplay } from "./project-display.js";
 import { projectManager } from "./storage.js";
@@ -6,6 +7,65 @@ import "./style.css";
 const sidebarInit = () => {
     const sidebar = sidebarLoad();
     const projectDisplay = loadProjectDisplay();
+
+    const homeAllBtn = document.querySelector(".home-all");
+    homeAllBtn.addEventListener("click", () => {
+        sidebar.loadAll();
+
+        const todoList = document.querySelector(".todo-list");
+        const projects = projectManager.getProjects();
+        projects.forEach((project) => {
+            project.todos.forEach((todo) => {
+                todoList.appendChild(projectDisplay.createTodoTab(todo));
+            });
+        });
+    });
+
+    const homeTodayBtn = document.querySelector(".home-today");
+    homeTodayBtn.addEventListener("click", () => {
+        sidebar.loadToday();
+
+        const todoList = document.querySelector(".todo-list");
+        projectManager.getProjects().forEach((project) => {
+            project.todos.forEach((todo) => {
+                if (isToday(parseISO(todo.dueDate))) {
+                    todoList.appendChild(
+                        projectDisplay.createTodoTab(todo)
+                    );
+                }
+            });
+        });
+    });
+
+    const homeIncompleteBtn = document.querySelector(".home-incomplete");
+    homeIncompleteBtn.addEventListener("click", () => {
+        sidebar.loadIncomplete();
+
+        const todoList = document.querySelector(".todo-list");
+        const projects = projectManager.getProjects();
+        projects.forEach((project) => {
+            project.todos.forEach((todo) => {
+                if (todo.isComplete === false) {
+                    todoList.appendChild(projectDisplay.createTodoTab(todo));
+                }
+            });
+        });
+    });
+
+    const homeCompleteBtn = document.querySelector(".home-complete");
+    homeCompleteBtn.addEventListener("click", () => {
+        sidebar.loadComplete();
+
+        const todoList = document.querySelector(".todo-list");
+        const projects = projectManager.getProjects();
+        projects.forEach((project) => {
+            project.todos.forEach((todo) => {
+                if (todo.isComplete === true) {
+                    todoList.appendChild(projectDisplay.createTodoTab(todo));
+                }
+            });
+        });
+    });
 
     // Event listener to handle opening a new project prompt
     const addProjBtn = document.querySelector(".add-project");

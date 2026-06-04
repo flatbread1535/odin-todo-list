@@ -2,8 +2,58 @@ import { projectManager } from "./storage.js";
 import folderSvg from "./svgs/folder.svg";
 import menuSvg from "./svgs/menu.svg";
 import deleteSvg from "./svgs/delete.svg";
+import { loadProjectDisplay } from "./project-display.js";
 
 const sidebarLoad = () => {
+
+    const main = document.querySelector(".main");
+    const loadAll = () => {
+        main.replaceChildren();
+        const allHeader = document.createElement("h1");
+        allHeader.classList.add("project-header");
+        allHeader.textContent = "All Todos";
+        main.appendChild(allHeader);
+
+        const todoList = document.createElement("div");
+        todoList.classList.add("todo-list");
+        main.appendChild(todoList);
+    };
+
+    const loadToday = () => {
+        main.replaceChildren();
+        const todayHeader = document.createElement("h1");
+        todayHeader.classList.add("project-header");
+        todayHeader.textContent = "Todos Due Today";
+        main.appendChild(todayHeader);
+
+        const todoList = document.createElement("div");
+        todoList.classList.add("todo-list");
+        main.appendChild(todoList);
+    };
+
+    const loadIncomplete = () => {
+        main.replaceChildren();
+        const incompleteHeader = document.createElement("h1");
+        incompleteHeader.classList.add("project-header");
+        incompleteHeader.textContent = "Incomplete Todos";
+        main.appendChild(incompleteHeader);
+
+        const todoList = document.createElement("div");
+        todoList.classList.add("todo-list");
+        main.appendChild(todoList);
+    };
+
+    const loadComplete = () => {
+        main.replaceChildren();
+        const completeHeader = document.createElement("h1");
+        completeHeader.classList.add("project-header");
+        completeHeader.textContent = "Complete Todos";
+        main.appendChild(completeHeader);
+
+        const todoList = document.createElement("div");
+        todoList.classList.add("todo-list");
+        main.appendChild(todoList);
+    };
 
     const loadNewProjectPrompt = () => {
         const promptContainer = document.querySelector(".project-controls");
@@ -90,7 +140,7 @@ const sidebarLoad = () => {
         // Deletion button
         const deleteProjBtn = document.createElement("button");
         deleteProjBtn.classList.add("project-opt-btn", "delete-proj");
-        
+
         // SVG inside the deletion button
         const deleteIcon = document.createElement("img");
         deleteIcon.src = deleteSvg;
@@ -106,7 +156,7 @@ const sidebarLoad = () => {
         menuIcon.src = menuSvg;
         editProjBtn.appendChild(menuIcon);
         projOpt.appendChild(editProjBtn);
-        
+
         projectItem.appendChild(projOpt);
         projectContainer.appendChild(projectItem);
         projects.appendChild(projectContainer);
@@ -120,13 +170,13 @@ const sidebarLoad = () => {
 
         // Checks if an edit proejct prompt is already open
         if (document.querySelector(".edit-project")) return;
-        
+
         // Label for rename input textbox
         const renameInstruction = document.createElement("label");
         renameInstruction.htmlFor = "new-name";
         renameInstruction.textContent = "Rename Project:";
         editProject.appendChild(renameInstruction);
-        
+
         // Input text box for renaming
         const renameInput = document.createElement("input");
         renameInput.type = "text";
@@ -137,7 +187,7 @@ const sidebarLoad = () => {
         // Container for edit option buttons
         const editProjOpt = document.createElement("div");
         editProjOpt.classList.add("edit-proj-opt");
-        
+
         // Button for submitting project with new name
         const renameProj = document.createElement("button");
         renameProj.type = "submit";
@@ -173,10 +223,20 @@ const sidebarLoad = () => {
         projectManager.deleteProject(projectId);
         projectContainer.remove();
     };
-    
+
     // Add toggleSidebar function later, maybe deletion confirmation prompt
 
-    return { loadNewProjectPrompt, loadNewProject, loadEditPrompt, renameProject, deleteProject };
+    return {
+        loadNewProjectPrompt,
+        loadNewProject,
+        loadEditPrompt,
+        renameProject,
+        deleteProject,
+        loadAll,
+        loadToday,
+        loadIncomplete,
+        loadComplete
+    };
 };
- 
+
 export { sidebarLoad };

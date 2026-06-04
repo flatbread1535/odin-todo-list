@@ -15,11 +15,13 @@ const createProjectManager = () => {
         return projects.find(project => project.projectId === projectId);
     };
 
+    const getProjects = () => projects;
+
     const deleteProject = (projectId) => {
         projects = projects.filter(project => project.projectId !== projectId);
     };
 
-    return { addProject, getProject, deleteProject };
+    return { addProject, getProject, getProjects, deleteProject };
 };
 
 const projectManager = createProjectManager();
