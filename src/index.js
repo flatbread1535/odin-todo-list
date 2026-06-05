@@ -118,7 +118,9 @@ const sidebarInit = () => {
         if (deleteBtn) {
             const projectContainer = deleteBtn.closest(".project-container");
             const projectId = projectContainer.dataset.projectId;
-            sidebar.deleteProject(projectContainer);
+
+            projectManager.deleteProject(projectId);
+            projectContainer.remove();
             projectDisplay.removeProjectDisplay(projectId);
         }
     });
@@ -224,17 +226,30 @@ const projectDisplayInit = () => {
     const defaultInit = () => {
         const sidebar = sidebarLoad();
 
-        const defaultProject = projectManager.addProject("Default");
-        sidebar.loadNewProject("Default");
-        currentProjectId = defaultProject.projectId;
+        projectManager.load();
+
+        const projects = projectManager.getProjects();
+
+        if (projects.length === 0) {
+            const defaultProject = sidebar.loadNewProject("Default");
+            currentProjectId = defaultProject.projectId;
+        } else {
+            projects.forEach((project) => {
+                sidebar.renderProjectTab(project);
+            });
+
+            currentProjectId = projects[0].projectId;
+
+            projectDisplay.displayProject(currentProjectId);
+        }
     };
 
     defaultInit();
 };
 
-const webPageInit = () => {
-    sidebarInit();
-    projectDisplayInit();
-};
+    const webPageInit = () => {
+        sidebarInit();
+        projectDisplayInit();
+    };
 
 webPageInit();

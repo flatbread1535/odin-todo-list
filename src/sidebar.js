@@ -102,16 +102,13 @@ const sidebarLoad = () => {
         cancelProjBtn.onclick = () => projForm.remove();
     };
 
-    const loadNewProject = (projectName) => {
-        const newProject = projectManager.addProject(projectName);
-        const newProjectId = newProject.projectId;
-
+    const renderProjectTab = (project) => {
         const projects = document.querySelector(".projects");
 
         // Creating a new container for the project and adding the project id to the container
         const projectContainer = document.createElement("div");
         projectContainer.classList.add("project-container");
-        projectContainer.dataset.projectId = newProjectId;
+        projectContainer.dataset.projectId = project.projectId;
 
         // Container to store the actual project tab information
         const projectItem = document.createElement("div");
@@ -129,7 +126,7 @@ const sidebarLoad = () => {
         // Name of the project displayed on the tab
         const name = document.createElement("p");
         name.classList.add("proj-name");
-        name.textContent = projectName;
+        name.textContent = project.name;
         projectTab.appendChild(name);
         projectItem.appendChild(projectTab);
 
@@ -160,6 +157,12 @@ const sidebarLoad = () => {
         projectItem.appendChild(projOpt);
         projectContainer.appendChild(projectItem);
         projects.appendChild(projectContainer);
+    };
+
+    const loadNewProject = (projectName) => {
+        const newProject = projectManager.addProject(projectName);
+        
+        renderProjectTab(newProject);
     };
 
     // 
@@ -235,7 +238,8 @@ const sidebarLoad = () => {
         loadAll,
         loadToday,
         loadIncomplete,
-        loadComplete
+        loadComplete,
+        renderProjectTab,
     };
 };
 
