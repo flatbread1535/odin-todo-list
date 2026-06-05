@@ -1,6 +1,7 @@
 import { isToday, parseISO } from "date-fns";
 import { sidebarLoad } from "./sidebar.js";
 import { loadProjectDisplay } from "./project-display.js";
+import { loadTodoDisplay } from "./todo-display.js";
 import { projectManager } from "./storage.js";
 import "./style.css";
 
@@ -125,6 +126,7 @@ const sidebarInit = () => {
 
 const projectDisplayInit = () => {
     const projectDisplay = loadProjectDisplay();
+    const todoDisplay = loadTodoDisplay();
     let currentProjectId = null;
 
     const projects = document.querySelector(".projects");
@@ -153,12 +155,42 @@ const projectDisplayInit = () => {
         const deleteBtn = e.target.closest(".delete-todo");
 
         if (deleteBtn) {
-            const todoTab = document.querySelector(".todo-tab");
+            const todoTab = e.target.closest(".todo-tab");
             const todoId = todoTab.dataset.todoId;
             projectManager.getProjects().forEach((project) => {
                 project.removeTodo(todoId);
             });
             todoTab.remove();
+        }
+
+        const viewBtn = e.target.closest(".view-todo");
+
+        if (viewBtn) {
+            let selectedTodo = null;
+            let selectedProjectId = null;
+
+            const todoTab = e.target.closest(".todo-tab");
+            const todoId = todoTab.dataset.todoId;
+
+            projectManager.getProjects().forEach((project) => {
+                project.todos.forEach((todo) => {
+                    if (todo.id === todoId) {
+                        selectedTodo = todo;
+                        selectedProjectId = project.projectId;
+                    }
+                });
+            });
+
+            if (selectedTodo) {
+                todoDisplay.loadTodoInfo(selectedTodo, selectedProjectId);
+            }
+        }
+
+        const goBackBtn = e.target.closest(".go-back-btn");
+
+        if (goBackBtn) {
+            const projectId = goBackBtn.dataset.projectId;
+            projectDisplay.displayProject(projectId);
         }
     });
 

@@ -258,7 +258,8 @@ input[id="new-name"]:focus {
     flex-direction: column;
 }
 
-.project-header {
+.project-header,
+.todo-view-title {
     height: 60px;
     background-color: var(--blue);
     align-content: center;
@@ -519,4 +520,37 @@ label[for="todo-notes"],
 
 .dialog-cancel:hover {
     background: var(--hover-red);
+}
+
+.todo-view-title {
+    margin-bottom: 60px;
+}
+
+.todo-view-container {
+    background: var(--white);
+    border: 2px solid var(--dark-gray);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 1rem;
+    border-radius: 40px;
+}
+
+.todo-view-container > p {
+    color: var(--dark-gray);
+    min-height: 120px;
+}
+
+.go-back-btn {
+    height: 52px;
+    width: 160px;
+    color: var(--white);
+    background-color: var(--red);
+    border: none;
+    border-radius: 8px;
+}
+
+.go-back-btn:hover {
+    background-color: var(--hover-red);
 }
