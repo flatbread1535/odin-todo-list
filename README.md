@@ -8,7 +8,7 @@ This project was created for the Odin Project with the purpose of building a Tod
 * Display for more information about each todo that can be opened. 
 * A button that opens a dialog with a form for users to input new todos.
 
-## Concepts used for this proejct:
+## Concepts used for this project:
 * Previous HTML/CSS concepts
 * JavaScript classes, objects, factory functions, IIFE
 * DOM rendering with JavaScript
