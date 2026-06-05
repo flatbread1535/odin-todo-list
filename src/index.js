@@ -149,6 +149,17 @@ const projectDisplayInit = () => {
             dialogForm.reset();
             todoDialog.showModal();
         }
+
+        const deleteBtn = e.target.closest(".delete-todo");
+
+        if (deleteBtn) {
+            const todoTab = document.querySelector(".todo-tab");
+            const todoId = todoTab.dataset.todoId;
+            projectManager.getProjects().forEach((project) => {
+                project.removeTodo(todoId);
+            });
+            todoTab.remove();
+        }
     });
 
     const todoDialog = document.querySelector(".todo-dialog");

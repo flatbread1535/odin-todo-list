@@ -64,6 +64,7 @@ const loadProjectDisplay = () => {
 
         const todoTab = document.createElement("div");
         todoTab.classList.add("todo-tab");
+        todoTab.dataset.todoId = todo.id;
 
         const todoBasicInfo = document.createElement("div");
         todoBasicInfo.classList.add("todo-basic-info");
